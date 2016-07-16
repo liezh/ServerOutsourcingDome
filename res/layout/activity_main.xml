@@ -9,10 +9,17 @@
     tools:context="com.example.httptest01.MainActivity" >
 
     <Button
-        android:id="@+id/testButton"
+        android:id="@+id/getButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:text="测试" />
+        android:text="get测试" />
+
+    <Button
+        android:id="@+id/postButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/getButton"
+        android:text="post测试" />
 
 </RelativeLayout>

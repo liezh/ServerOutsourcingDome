@@ -11,6 +11,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.domain.task.Task;
+import com.domain.task.TaskList;
 
 /**
  * 完成对json数据的解析
@@ -29,10 +30,14 @@ public class JsonTools {
 		try {
 			JSONObject jsonObject = new JSONObject(jsonString);
 			JSONObject taskObject = jsonObject.getJSONObject("task");
-			task.setId(taskObject.getInt("id"));
+			task.setTask_id(taskObject.getInt("task_id"));
 			task.setTitle(taskObject.getString("title"));
 			task.setSynopsis(taskObject.getString("synopsis"));
-			task.setReward(taskObject.getInt("reward"));
+			task.setBeginTime(taskObject.getString("beginTime"));
+			task.setEndTime(taskObject.getString("endTime"));
+			task.setIntergtation(taskObject.getInt("intergtation"));
+			task.setReward(taskObject.getString("reward"));
+			task.setUrgent(taskObject.getInt("urgent"));
 			
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -40,27 +45,12 @@ public class JsonTools {
 		}
 		return task;
 	}
+	
+	
+	
 
-	public static List<Task> getTasks(String key, String jsonString) {
-		List<Task> list = new ArrayList<Task>();
-		try {
-			JSONObject jsonObject = new JSONObject(jsonString);
-			// 返回json的数组
-			JSONArray jsonArray = jsonObject.getJSONArray(key);
-			for (int i = 0; i < jsonArray.length(); i++) {
-				JSONObject jsonObject2 = jsonArray.getJSONObject(i);
-				Task task = new Task();
-				task.setId(jsonObject2.getInt("id"));
-				task.setTitle(jsonObject2.getString("title"));
-				task.setSynopsis(jsonObject.getString("synopsis"));
-				list.add(task);
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		return list;
-	}
+	
+
 
 	public static List<String> getList(String key, String jsonString) {
 		List<String> list = new ArrayList<String>();
@@ -106,6 +96,13 @@ public class JsonTools {
 		return list;
 	}
 	
+	/**
+	 * 把数据value转换成相对应的json语句并返回
+	 * @param key
+	 * @param value
+	 * @return
+	 */
+	
 	public static String toJsonString(String key, Object value) {
 		JSONObject jsonObject = new JSONObject();
 		try {
@@ -119,11 +116,54 @@ public class JsonTools {
 	
 	
 	
-	public static void main(String[] args) {
-		// TODO 自动生成的方法存根
-		String jsonString = "{\"task\":{\"id\":101,\"title\":\"测试\"，\"synopsis\":\"简介\"}}";
-		List<Task> list = getTasks("task", jsonString);
-		System.out.println(list.toString());
-
+	
+	public static List<Task> getTasks(String key, String jsonString) {
+		List<Task> list = new ArrayList<Task>();
+		try {
+			JSONObject jsonObject = new JSONObject(jsonString);
+			// 返回json的数组
+			JSONArray jsonArray = jsonObject.getJSONArray(key);
+			for (int i = 0; i < jsonArray.length(); i++) {
+				JSONObject jsonObject2 = jsonArray.getJSONObject(i);
+				Task task = new Task();
+				task.setTask_id(jsonObject2.getInt("task_id"));
+				task.setTitle(jsonObject2.getString("title"));
+				task.setSynopsis(jsonObject2.getString("synopsis"));
+				task.setBeginTime(jsonObject2.getString("beginTime"));
+				task.setEndTime(jsonObject2.getString("endTime"));
+				task.setIntergtation(jsonObject2.getInt("intergtation"));
+				task.setReward(jsonObject2.getString("reward"));
+				task.setUrgent(jsonObject2.getInt("urgent"));
+				list.add(task);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return list;
 	}
+	
+	public static List<TaskList> getTaskListInfo(String key, String jsonString){
+		List<TaskList> list = new ArrayList<TaskList>();
+		try {
+			JSONObject jsonObject = new JSONObject(jsonString);
+			// 返回json的链表
+			JSONArray jsonArray = jsonObject.getJSONArray(key);
+			for (int i = 0; i < jsonArray.length(); i++) {
+				JSONObject jsonObject2 = jsonArray.getJSONObject(i);
+				TaskList taskList = new TaskList();
+				taskList.setTask_id(jsonObject2.getInt("task_id"));
+				taskList.setTitle(jsonObject2.getString("title"));
+				taskList.setSynopsis(jsonObject2.getString("synopsis"));
+				taskList.setIntergration(jsonObject2.getInt("intergration"));
+				taskList.setReward(jsonObject2.getString("reward"));
+				list.add(taskList);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return list;
+	}
+
 }

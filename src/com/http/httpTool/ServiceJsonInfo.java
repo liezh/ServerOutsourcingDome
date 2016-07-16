@@ -60,19 +60,17 @@ public class ServiceJsonInfo {
 		return "";
 	}
 	
-	/*
-	 * @baseURL是提交数据的URL地址
-	 * 
+	/**
+	 * 这是把数据传输到指定的url的方法
+	 * @param baseURL 传递的URL
+	 * @param nameValuePairs  封装好的数据集
+	 * @return
 	 */
-	public String postJsonInfoToService(String baseURL){
+	public String postJsonInfoToService(String baseURL,List<NameValuePair> nameValuePairs){
 		
 		HttpClient httpClient = new DefaultHttpClient();
 		
-		String name = "action_flag";
-		String value = "listmap";
-		NameValuePair nameValuePair = new BasicNameValuePair(name, value);
-		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-		nameValuePairs.add(nameValuePair);
+
 		try {
 			//设置请求体
 			HttpEntity requestHttpEntity = new UrlEncodedFormEntity(nameValuePairs);
