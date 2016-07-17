@@ -46,11 +46,6 @@ public class JsonTools {
 		return task;
 	}
 	
-	
-	
-
-	
-
 
 	public static List<String> getList(String key, String jsonString) {
 		List<String> list = new ArrayList<String>();
@@ -102,7 +97,6 @@ public class JsonTools {
 	 * @param value
 	 * @return
 	 */
-	
 	public static String toJsonString(String key, Object value) {
 		JSONObject jsonObject = new JSONObject();
 		try {
