@@ -46,4 +46,13 @@
         android:layout_marginTop="23dp"
         android:src="@drawable/ic_launcher" />
 
+            <Button
+                android:id="@+id/UploadButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/postButton"
+                android:layout_marginLeft="62dp"
+                android:layout_toRightOf="@+id/postButton"
+                android:text="上传图片" />
+
 </RelativeLayout>

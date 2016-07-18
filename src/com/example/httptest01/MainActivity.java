@@ -16,6 +16,7 @@ import com.domain.task.TaskList;
 import com.http.httpTool.AsyncImageLoader;
 import com.http.httpTool.CallBackImpl;
 import com.http.httpTool.EncapsulatePostBady;
+import com.http.httpTool.HttpUploadThread;
 import com.http.httpTool.ServiceJsonInfo;
 import com.json.tools.JsonTools;
 
@@ -31,7 +32,7 @@ import android.widget.ImageView;
 
 public class MainActivity extends Activity {
 
-	Button getButton, postButton;
+	Button getButton, postButton,upButton;
 	HttpResponse httpResponse;
 	HttpEntity httpEntity;
 	Handler handler;
@@ -43,6 +44,7 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		getButton = (Button) findViewById(R.id.getButton);
 		postButton = (Button) findViewById(R.id.postButton);
+		upButton = (Button) findViewById(R.id.UploadButton);
 
 		loadImage("https://p1.ssl.qhimg.com/t0151320b1d0fc50be8.png",
 				R.id.imageView1);
@@ -76,6 +78,19 @@ public class MainActivity extends Activity {
 				t.start();
 			}
 		});
+		
+		upButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO 自动生成的方法存根
+				final String url = "http://192.168.90.227:8080/upload/Upload";
+				String fileName = "fate.jpg";
+				HttpUploadThread httpUploadThread = new HttpUploadThread(url,fileName);
+				httpUploadThread.start();
+			}
+		});
+		
 	}
 
 	private void loadImage(String url, int imagID) {
